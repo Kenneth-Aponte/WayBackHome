@@ -20,7 +20,6 @@ public class Images {
     public static BufferedImage titleScreenBackground;
     public static BufferedImage pauseBackground;
     public static BufferedImage selectionBackground;
-    public static BufferedImage[] games;
     public static BufferedImage galagaCopyright;
     public static BufferedImage galagaSelect;
     public static BufferedImage muteIcon;
@@ -30,14 +29,14 @@ public class Images {
     public static BufferedImage[] pauseResumeButton;
     public static BufferedImage[] pauseToTitleButton;
     public static BufferedImage[] pauseOptionsButton;
-    public static BufferedImage[] galagaLogo;
-    public static BufferedImage[] galagaPlayer;
-    public static BufferedImage[] galagaPlayerDeath;
-    public static BufferedImage[] galagaEnemyDeath;
-    public static BufferedImage[] galagaEnemyBee;
-    public static BufferedImage[] galagamyEnemy;
     public static BufferedImage galagaImageSheet;
     public SpriteSheet galagaSpriteSheet;
+    
+    public static BufferedImage astronautSheetImage;
+    public SpriteSheet astronautSpriteSheet;
+    public static BufferedImage[] astronaut;
+    public static BufferedImage WBHLogo;
+    
     
     
     
@@ -47,16 +46,12 @@ public class Images {
         pauseResumeButton = new BufferedImage[2];
         pauseToTitleButton = new BufferedImage[2];
         pauseOptionsButton = new BufferedImage[2];
-        games = new BufferedImage[7];
+        astronaut = new BufferedImage[12];
         
-        galagaLogo = new BufferedImage[3];
-        galagaPlayer = new BufferedImage[8];//not full yet, only has second to last image on sprite sheet
-        galagaPlayerDeath = new BufferedImage[8];
-        galagaEnemyDeath = new BufferedImage[5];
-        galagaEnemyBee = new BufferedImage[8];
-        galagamyEnemy = new BufferedImage[7];
+        
         
         try {
+        	
         	startGameButton[0]= ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Start/NormalStartButton.png"));
             startGameButton[1]= ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Start/HoverStartButton.png"));
             startGameButton[2]= ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Start/ClickedStartButton.png"));
@@ -80,7 +75,25 @@ public class Images {
 
             pauseOptionsButton[0] = ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Pause/ToOptions/NormalHoverToOptionsButton.png"));
             pauseOptionsButton[1] = ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Pause/ToOptions/PressedToOptionsButton.png"));
-           
+            
+            
+            WBHLogo = ImageIO.read(getClass().getResourceAsStream("/UI/TITLEWBH.png"));
+            
+            astronautSheetImage = ImageIO.read(getClass().getResourceAsStream("/UI/Astronaut/NASA Astronaut 3.png"));
+            astronautSpriteSheet = new SpriteSheet(astronautSheetImage);
+            
+            astronaut[0] = astronautSpriteSheet.crop(8, 9, 17, 23);
+            astronaut[1] = astronautSpriteSheet.crop(40, 7, 17, 25);
+            astronaut[2] = astronautSpriteSheet.crop(72, 7, 17, 25);
+//            astronaut[3] = astronautSpriteSheet.crop(10, 10, 16, 21);
+//            astronaut[4] = astronautSpriteSheet.crop(10, 10, 16, 21);
+//            astronaut[5] = astronautSpriteSheet.crop(10, 10, 16, 21);
+//            astronaut[6] = astronautSpriteSheet.crop(10, 10, 16, 21);
+//            astronaut[7] = astronautSpriteSheet.crop(10, 10, 16, 21);
+//            astronaut[8] = astronautSpriteSheet.crop(10, 10, 16, 21);
+//            astronaut[9] = astronautSpriteSheet.crop(7, 105, 16, 23);
+            astronaut[10] = astronautSpriteSheet.crop(39, 104, 16, 24);
+            astronaut[11] = astronautSpriteSheet.crop(71, 105, 16, 23);
             
             
         }catch (IOException e) {

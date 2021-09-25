@@ -38,6 +38,13 @@ public class Animation {
         timer = 0;
         lastTime = System.currentTimeMillis();
     }
+    
+    public Animation(int speed) {
+    	this.speed=speed;
+        index = 0;
+        timer = 0;
+        lastTime = System.currentTimeMillis();
+    }
 
     public void tick(){
         timer += System.currentTimeMillis() - lastTime;
@@ -67,6 +74,18 @@ public class Animation {
             }
         }
 
+    }
+    
+    public void tick1() {
+    	timer += System.currentTimeMillis() - lastTime;
+        lastTime = System.currentTimeMillis();
+
+        if(timer > speed){
+            index++;
+            timer = 0;
+                end =true;
+                index = 0;
+        }
     }
 
     public BufferedImage getCurrentFrame(){
