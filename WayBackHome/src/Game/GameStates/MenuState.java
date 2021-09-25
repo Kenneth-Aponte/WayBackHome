@@ -42,7 +42,7 @@ public class MenuState extends State {
         walkingRight[1] = Images.astronaut[10];
         walkingRight[2] = Images.astronaut[11];
         
-        walkingRightAnim = new Animation(100,walkingRight);
+        walkingRightAnim = new Animation(80,walkingRight);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class MenuState extends State {
     	
     	//character movement
     	if(xPos >= 7*handler.getWidth()/8) {//if the pos of the character gets to 7/8ths of the screen the game loads
-    		System.out.println("loads the game (changes to the next state)");
+    		handler.changeState(handler.getTransitionState());
     	}
     	
     	if(xPos < handler.getWidth()/2 || pressedEnter) {//astronaut will move if it hasn't reached the middle of the screen or player pressed enter
@@ -94,8 +94,6 @@ public class MenuState extends State {
     	//the stars are always there, though depending on the index of the animation, the color will be black or white simulating blinking
     	for(int[] star: starPos) {
     		
-    		//could be a circle or square, still deciding
-//			g.drawOval(star[0], star[1], 5, 5);
     		g.fillRect(star[0], star[1], 3, 3);
 		}
     	
@@ -105,11 +103,23 @@ public class MenuState extends State {
     	//Press enter text 
     	g.setColor(Color.white);
     	g.setFont(enterFont);
-    	g.drawString("PRESS ENTER TO CONTINUE", handler.getWidth()/2 - handler.getWidth()/10, handler.getHeight()/4*3);    	
+    	if(!pressedEnter) {
+    		g.drawString("PRESS ENTER TO CONTINUE", handler.getWidth()/2 - handler.getWidth()/10, handler.getHeight()/4*3);
+    	}
+    	else {
+    		g.drawString("HE'LL GET THERE", handler.getWidth()/2 - handler.getWidth()/16, handler.getHeight()/4*3);
+    	}
+    	    	
      	
     	//astronaut walking
     	g.drawImage(walkingRightAnim.getCurrentFrame(),xPos , handler.getHeight()/2 + handler.getHeight()/8, 40, 58,null);
-
+    	
+    	//shuttle
+    	if(pressedEnter) {
+        	g.drawImage(Images.shuttle[0],7*handler.getWidth()/8,handler.getHeight()/2 -2,112,208,null);
+    	}
+    	
+    	
     }
 
 

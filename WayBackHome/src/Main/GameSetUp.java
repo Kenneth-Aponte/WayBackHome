@@ -37,6 +37,8 @@ public class GameSetUp implements Runnable {
     //States
     public State menuState;
     public State pauseState;
+    public State transitionState;
+    public State gameState;
 
 
 
@@ -69,6 +71,8 @@ public class GameSetUp implements Runnable {
 
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
+        transitionState = new TransitionState(handler);
+        gameState = new GameState(handler);
 
         handler.setScoreManager(new ScoreManager(handler));
         handler.setMusicHandler(new MusicHandler(handler));
@@ -83,6 +87,9 @@ public class GameSetUp implements Runnable {
     public void reStart(boolean clearScore){
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
+        transitionState = new TransitionState(handler);
+        gameState = new GameState(handler);
+        
         if (clearScore){
             handler.setScoreManager(new ScoreManager(handler));
         }

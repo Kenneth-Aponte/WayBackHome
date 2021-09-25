@@ -32,10 +32,17 @@ public class Images {
     public static BufferedImage galagaImageSheet;
     public SpriteSheet galagaSpriteSheet;
     
+    public static BufferedImage mainMap;
+    
+    public static BufferedImage WBHLogo;
     public static BufferedImage astronautSheetImage;
     public SpriteSheet astronautSpriteSheet;
     public static BufferedImage[] astronaut;
-    public static BufferedImage WBHLogo;
+    
+
+    public static BufferedImage shuttleSheetImage;
+    public SpriteSheet shuttleSpriteSheet;
+    public static BufferedImage[] shuttle;
     
     
     
@@ -47,6 +54,7 @@ public class Images {
         pauseToTitleButton = new BufferedImage[2];
         pauseOptionsButton = new BufferedImage[2];
         astronaut = new BufferedImage[12];
+        shuttle = new BufferedImage[2];
         
         
         
@@ -85,16 +93,24 @@ public class Images {
             astronaut[0] = astronautSpriteSheet.crop(8, 9, 17, 23);
             astronaut[1] = astronautSpriteSheet.crop(40, 7, 17, 25);
             astronaut[2] = astronautSpriteSheet.crop(72, 7, 17, 25);
-//            astronaut[3] = astronautSpriteSheet.crop(10, 10, 16, 21);
-//            astronaut[4] = astronautSpriteSheet.crop(10, 10, 16, 21);
-//            astronaut[5] = astronautSpriteSheet.crop(10, 10, 16, 21);
-//            astronaut[6] = astronautSpriteSheet.crop(10, 10, 16, 21);
-//            astronaut[7] = astronautSpriteSheet.crop(10, 10, 16, 21);
-//            astronaut[8] = astronautSpriteSheet.crop(10, 10, 16, 21);
-//            astronaut[9] = astronautSpriteSheet.crop(7, 105, 16, 23);
+            astronaut[3] = astronautSpriteSheet.crop(9, 41, 16, 23);
+            astronaut[4] = astronautSpriteSheet.crop(41, 40, 16, 24);
+            astronaut[5] = astronautSpriteSheet.crop(73, 41, 16, 23);
+            astronaut[6] = astronautSpriteSheet.crop(8, 73, 17, 23);
+            astronaut[7] = astronautSpriteSheet.crop(41, 71, 16, 25);
+            astronaut[8] = astronautSpriteSheet.crop(72, 71, 16, 25);
+            astronaut[9] = astronautSpriteSheet.crop(7, 105, 16, 23);
             astronaut[10] = astronautSpriteSheet.crop(39, 104, 16, 24);
             astronaut[11] = astronautSpriteSheet.crop(71, 105, 16, 23);
             
+            
+            shuttleSheetImage = ImageIO.read(getClass().getResourceAsStream("/UI/SpaceShuttle/SpaceShuttle.png"));
+            shuttleSpriteSheet = new SpriteSheet(shuttleSheetImage);
+            
+            shuttle[0] = shuttleSpriteSheet.crop(4, 6, 44, 84);
+            shuttle[1] = shuttleSpriteSheet.crop(109, 25, 42, 57);
+            
+            mainMap = ImageIO.read(getClass().getResourceAsStream("/UI/Map/sampleMap.png"));
             
         }catch (IOException e) {
         e.printStackTrace();

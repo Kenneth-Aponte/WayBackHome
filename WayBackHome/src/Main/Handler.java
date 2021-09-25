@@ -64,6 +64,14 @@ public class Handler {
     public MenuState getMenuState (){
         return (MenuState) getGameProperties().menuState;
     }
+    
+    public TransitionState getTransitionState() {
+    	return (TransitionState) getGameProperties().transitionState;
+    }
+    
+    public GameState getGameState() {
+    	return (GameState) getGameProperties().gameState;
+    }
 
     public PauseState getPauseState (){
         return (PauseState) getGameProperties().pauseState;
