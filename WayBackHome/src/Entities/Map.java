@@ -27,7 +27,6 @@ public class Map {
 	
 	public void render(Graphics g) {
 		g.drawImage(Images.mainMap, x, y, width, height, null);
-		g.setColor(Color.blue);
 	}
 	
 	

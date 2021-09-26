@@ -110,7 +110,7 @@ public class Images {
             shuttle[0] = shuttleSpriteSheet.crop(4, 6, 44, 84);
             shuttle[1] = shuttleSpriteSheet.crop(109, 25, 42, 57);
             
-            mainMap = ImageIO.read(getClass().getResourceAsStream("/UI/Map/sampleMap.png"));
+            mainMap = ImageIO.read(getClass().getResourceAsStream("/UI/Map/Map1.2.png"));
             
         }catch (IOException e) {
         e.printStackTrace();

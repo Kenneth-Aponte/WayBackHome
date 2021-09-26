@@ -76,6 +76,9 @@ public class MenuState extends State {
     	if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
     		pressedEnter = true;//self explanatory
     	}
+    	if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
+    		handler.changeState(handler.getGameState());
+    	}
     	
     }
 

@@ -17,6 +17,17 @@ public class Astronaut {
 	public Animation walkingR;
 	
 	public String walkingDir = "D";
+	public boolean moveUp = false;
+	public boolean moveDown = false;
+	public boolean moveLeft = false;
+	public boolean moveRight = false;
+	
+	public boolean reachedTop = false;
+	public boolean reachedBottom = false;
+	public boolean reachedLeft = false;
+	public boolean reachedRight = false;
+	
+	public boolean moveMap = true;
 	
 	public Handler handler;
 	
@@ -61,18 +72,78 @@ public class Astronaut {
 	public void tick1() {
 		if(handler.getKeyManager().up) {
 			walkingDir = "U";
+			moveMap = false;
+			if(moveUp) {
+				if(y > 0) {
+					y-=speed;
+				}	
+				moveDown = true;
+				if(reachedBottom) {//then that means he is on the bottom border
+					if(y <= handler.getHeight()/2+4) {
+						moveMap = true;
+						moveUp = false;
+						moveDown = false;
+					}
+				}
+			}
 			walkingU.tick();
 		}
+		
+		
 		if(handler.getKeyManager().down) {
 			walkingDir = "D";
+			moveMap = false;
+			if(moveDown) {
+				if(y < handler.getHeight() - height) {
+					y+=speed;
+				}
+				moveUp = true;
+				if(reachedTop) {//then that means he is on the top border
+					if(y >= handler.getHeight()/2-4) {
+						moveMap = true;
+						moveDown = false;
+						moveUp = false;
+					}
+				}
+			}
 			walkingD.tick();
 		}
+		
 		if(handler.getKeyManager().left) {
 			walkingDir = "L";
+			moveMap = false;
+			if(moveLeft) {
+				if(x > 0) {
+					x-=speed;
+				}
+				moveRight = true;
+				if(reachedRight) {//then that means he is on the right border
+					if(x <= handler.getWidth()/2+4) {
+						moveMap = true;
+						moveLeft = false;
+						moveRight = false;
+					}
+				}
+			}
 			walkingL.tick();
 		}
+		
 		if(handler.getKeyManager().right) {
 			walkingDir = "R";
+			moveMap = false;
+			if(moveRight) {
+				if(x < handler.getWidth() - width ) {
+					x+=speed;
+				}
+				moveLeft = true;
+				if(reachedLeft) {//then that means he is on the left border
+					if(x >= handler.getWidth()/2-4) {
+						moveMap = true;
+						moveRight = false;
+						moveLeft = false;
+					}
+				}
+			}
 			walkingR.tick();
 		}
 	}
