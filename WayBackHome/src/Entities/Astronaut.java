@@ -7,29 +7,26 @@ import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
 
+/*
+ * 
+ * Created by Kenneth-Aponte on 09/26/2021
+ * 
+ */
+
 public class Astronaut {
 	
-	public int x,y,width,height;
-	public int speed;
-	public Animation walkingU;
-	public Animation walkingD;
-	public Animation walkingL;
-	public Animation walkingR;
-	
-	public String walkingDir = "D";
-	public boolean moveUp = false;
-	public boolean moveDown = false;
-	public boolean moveLeft = false;
-	public boolean moveRight = false;
-	
-	public boolean reachedTop = false;
-	public boolean reachedBottom = false;
-	public boolean reachedLeft = false;
-	public boolean reachedRight = false;
-	
-	public boolean moveMap = true;
-	
 	public Handler handler;
+	
+	public int x,y,width,height,speed;
+	
+	//Animations for every walking Direction
+	public Animation walkingU;//up
+	public Animation walkingD;//down
+	public Animation walkingL;//left
+	public Animation walkingR;//right
+	
+	public String walkingDir = "D";//assumed looking down when the game starts, uses U,D,L, & R for up, down, left, & right respectively
+	
 	
 	
 	public Astronaut(int x, int y, int width, int height, int speed,Handler handler) {
@@ -39,117 +36,64 @@ public class Astronaut {
 		this.height = height;
 		this.speed = speed;
 		
-		//animation
+		//animations are created
 		BufferedImage[] walkingUArray = new BufferedImage[3];
 		walkingUArray[0] = Images.astronaut[0];
 		walkingUArray[1] = Images.astronaut[1];
 		walkingUArray[2] = Images.astronaut[2];
-		walkingU  = new Animation(80,walkingUArray);
+		walkingU  = new Animation(100,walkingUArray);
 		
 		BufferedImage[] walkingDArray = new BufferedImage[3];
 		walkingDArray[0] = Images.astronaut[6];
 		walkingDArray[1] = Images.astronaut[7];
 		walkingDArray[2] = Images.astronaut[8];
-		walkingD  = new Animation(80,walkingDArray);
+		walkingD  = new Animation(100,walkingDArray);
 		
 		BufferedImage[] walkingLArray = new BufferedImage[3];
 		walkingLArray[0] = Images.astronaut[3];
 		walkingLArray[1] = Images.astronaut[4];
 		walkingLArray[2] = Images.astronaut[5];
-		walkingL  = new Animation(80,walkingLArray);
+		walkingL  = new Animation(100,walkingLArray);
 		
 		BufferedImage[] walkingRArray = new BufferedImage[3];
 		walkingRArray[0] = Images.astronaut[9];
 		walkingRArray[1] = Images.astronaut[10];
 		walkingRArray[2] = Images.astronaut[11];
-		walkingR  = new Animation(80,walkingRArray);
+		walkingR  = new Animation(100,walkingRArray);
 		
 		this.handler = handler;
 		
 	}
 	
-	
+	//theres a reason as to why its called tick1
+	//TODO: WHEN INDIVIDUALS MAPS ARE CREATED VERIFY IF THE SAME TICK CAN BE USED FOR DIFFERENT MOVEMENT OR A NEW TICK SHOULD BE CREATED
 	public void tick1() {
+		//depending on the key pressed, it will tick the animation and change the dir variable
 		if(handler.getKeyManager().up) {
 			walkingDir = "U";
-			moveMap = false;
-			if(moveUp) {
-				if(y > 0) {
-					y-=speed;
-				}	
-				moveDown = true;
-				if(reachedBottom) {//then that means he is on the bottom border
-					if(y <= handler.getHeight()/2+4) {
-						moveMap = true;
-						moveUp = false;
-						moveDown = false;
-					}
-				}
-			}
 			walkingU.tick();
 		}
 		
-		
 		if(handler.getKeyManager().down) {
 			walkingDir = "D";
-			moveMap = false;
-			if(moveDown) {
-				if(y < handler.getHeight() - height) {
-					y+=speed;
-				}
-				moveUp = true;
-				if(reachedTop) {//then that means he is on the top border
-					if(y >= handler.getHeight()/2-4) {
-						moveMap = true;
-						moveDown = false;
-						moveUp = false;
-					}
-				}
-			}
 			walkingD.tick();
 		}
 		
 		if(handler.getKeyManager().left) {
 			walkingDir = "L";
-			moveMap = false;
-			if(moveLeft) {
-				if(x > 0) {
-					x-=speed;
-				}
-				moveRight = true;
-				if(reachedRight) {//then that means he is on the right border
-					if(x <= handler.getWidth()/2+4) {
-						moveMap = true;
-						moveLeft = false;
-						moveRight = false;
-					}
-				}
-			}
 			walkingL.tick();
 		}
 		
 		if(handler.getKeyManager().right) {
 			walkingDir = "R";
-			moveMap = false;
-			if(moveRight) {
-				if(x < handler.getWidth() - width ) {
-					x+=speed;
-				}
-				moveLeft = true;
-				if(reachedLeft) {//then that means he is on the left border
-					if(x >= handler.getWidth()/2-4) {
-						moveMap = true;
-						moveRight = false;
-						moveLeft = false;
-					}
-				}
-			}
 			walkingR.tick();
 		}
+		
 	}
 	
 	
 	public void render(Graphics g) {
+		//depending on the direction, the proper animation is rendered
 		if(walkingDir == "U") {
 			g.drawImage(walkingU.getCurrentFrame(), x, y, width, height, null);
 		}
@@ -164,12 +108,12 @@ public class Astronaut {
 		}
 	}
 	
+	//I had created this method thought i don't think it will be used, therefore:
+	//TODO: LOOK INTO THIS METHOD IN THE FUTURE -Kenneth
 	public void move(String direction) {
-		
 	}
 	
 	
 	public void refresh() {
-		
 	}
 }

@@ -17,26 +17,32 @@ import java.util.Random;
 public class MenuState extends State {
 	
 	Random rand = new Random();
+	
+	//stars
 	int[][] starPos = new int[60][2];//0 = x, 1 = y
 	Animation waitTime = new Animation(200);
 	Animation onTime = new Animation(200);
+	boolean turnedOn = true;
+	
+	//astronaut
 	int xPos = handler.getWidth()/4;
 	int speed = 1;
-
-	boolean pressedEnter = false;
 	Animation walkingRightAnim;
 	
+	//text
+	boolean pressedEnter = false;		
+	Font enterFont = new Font("Monospaced centered",0,24);
 	
-	Font enterFont = new Font("Monospaced",0,24);
-	boolean turnedOn = true;
 	
 
     public MenuState(Handler handler) {
         super(handler);
+        
         for(int[] star: starPos) {
-        	star[0] = rand.nextInt(handler.getWidth());
-        	star[1] = rand.nextInt(handler.getHeight());
+        	star[0] = rand.nextInt(handler.getWidth());//xPos
+        	star[1] = rand.nextInt(handler.getHeight());//yPos 
         }
+        
         BufferedImage[] walkingRight = new BufferedImage[3];
         walkingRight[0] = Images.astronaut[9];
         walkingRight[1] = Images.astronaut[10];
@@ -76,7 +82,9 @@ public class MenuState extends State {
     	if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
     		pressedEnter = true;//self explanatory
     	}
-    	if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
+    	
+    	//TODO: REMOVE DEBUGGING KEY
+    	if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {//takes you straight into the main map, skips the intro
     		handler.changeState(handler.getGameState());
     	}
     	
@@ -85,35 +93,33 @@ public class MenuState extends State {
     @Override
     public void render(Graphics g) {
     	
-    	//--------blinking----------
+    	//background
     	g.setColor(Color.black);
     	g.fillRect(0,0,handler.getWidth(),handler.getHeight());
     	
     	if(waitTime.end) {
-    		//random stars
     		g.setColor(Color.white);//changes the color to white such that stars can be seen
     	}
     	
     	//the stars are always there, though depending on the index of the animation, the color will be black or white simulating blinking
     	for(int[] star: starPos) {
-    		
     		g.fillRect(star[0], star[1], 3, 3);
 		}
     	
     	//logo by isabellagarrido
     	g.drawImage(Images.WBHLogo, handler.getWidth()/2 - handler.getWidth()/4,0,handler.getWidth()/2,handler.getWidth()/2,null);
     	
-    	//Press enter text 
+    	//text 
     	g.setColor(Color.white);
-    	g.setFont(enterFont);
+    	g.setFont(enterFont);    	
     	if(!pressedEnter) {
     		g.drawString("PRESS ENTER TO CONTINUE", handler.getWidth()/2 - handler.getWidth()/10, handler.getHeight()/4*3);
     	}
     	else {
     		g.drawString("HE'LL GET THERE", handler.getWidth()/2 - handler.getWidth()/16, handler.getHeight()/4*3);
+    		
     	}
     	    	
-     	
     	//astronaut walking
     	g.drawImage(walkingRightAnim.getCurrentFrame(),xPos , handler.getHeight()/2 + handler.getHeight()/8, 40, 58,null);
     	
@@ -121,8 +127,7 @@ public class MenuState extends State {
     	if(pressedEnter) {
         	g.drawImage(Images.shuttle[0],7*handler.getWidth()/8,handler.getHeight()/2 -2,112,208,null);
     	}
-    	
-    	
+    	    	
     }
 
 

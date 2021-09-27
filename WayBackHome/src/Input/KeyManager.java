@@ -11,8 +11,8 @@ import java.awt.event.KeyListener;
 public class KeyManager implements KeyListener {
 
 	private boolean[] keys,justPressed,cantPress;
-	public boolean up=false, down=false, left=false, right=false, dies=false, newLife=false;
-	public boolean pausebutt=false, attackfreeze= false; 
+	public boolean up=false, down=false, left=false, right=false;
+	public boolean sprinting;
 
 
 	public KeyManager(){
@@ -42,10 +42,8 @@ public class KeyManager implements KeyListener {
 		left = keys[KeyEvent.VK_A] || keys[KeyEvent.VK_LEFT];
 		right = keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
 //-----------extra key binds-----------------------------------------------------------------------		
-		dies = justPressed[KeyEvent.VK_N];
-		newLife = justPressed[KeyEvent.VK_L];//justPressed so that it only adds one life even if the player kept the key pressed
-		pausebutt = justPressed[KeyEvent.VK_ESCAPE];
-		attackfreeze = justPressed[KeyEvent.VK_F];
+			
+		sprinting = keys[KeyEvent.VK_SHIFT];
 //-------------------------------------------------------------------------------------------------
 	}
 

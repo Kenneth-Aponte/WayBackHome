@@ -31,10 +31,7 @@ public class PauseState extends State {
         if( count>=30){
             count=30;
         }
-        if(handler.getKeyManager().pausebutt && count>=30){
-            count=0;
-
-        }
+       
 
 
     }

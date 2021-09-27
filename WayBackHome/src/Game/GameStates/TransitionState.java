@@ -27,8 +27,8 @@ public class TransitionState extends State{
 	public TransitionState(Handler handler) {
 		super(handler);
 		 for(int[] star: starPos) {
-	        	star[0] = rand.nextInt(handler.getWidth());
-	        	star[1] = rand.nextInt(handler.getHeight());
+	        	star[0] = rand.nextInt(handler.getWidth());//xPos
+	        	star[1] = rand.nextInt(handler.getHeight());//yPos
 	        }
 		
 	}
@@ -56,16 +56,14 @@ public class TransitionState extends State{
 	    		}
 	    	}
 	    	
-	    	yPos-=speed;
+	    	yPos-=speed;//shuttle moves 
 	    	if(yPos <= -300) {
 	    		//transitions to next state
 	    		handler.changeState(handler.getGameState());
-	    	}
-			
-		}
-		
-		
+	    	}	
+		}	
 	}
+	
 
 	@Override
 	public void render(Graphics g) {
@@ -77,7 +75,6 @@ public class TransitionState extends State{
 	    	g.fillRect(0,0,handler.getWidth(),handler.getHeight());
 	    	
 	    	if(waitTime.end) {
-	    		//random stars
 	    		g.setColor(Color.white);//changes the color to white such that stars can be seen
 	    	}
 	    	//the stars are always there, though depending on the index of the animation, the color will be black or white simulating blinking
@@ -94,13 +91,11 @@ public class TransitionState extends State{
 			g.setColor(Color.white);
 			g.fillRect(0, 0, handler.getWidth(), handler.getHeight());	
 		}
-		
-		
 	}
+	
 
 	@Override
 	public void refresh() {
-		// TODO Auto-generated method stub
 		
 	}
 
